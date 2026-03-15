@@ -176,31 +176,3 @@ Measure-Command { $data | ForEach-Object { $null = $_ * 2 } } |
     Select-Object @{N='Method';E={'ForEach-Object'}}, TotalMilliseconds
 ```
 
----
-
-## 🌙 寝る前チートシート
-
-> **第6章の要点を3分で復習**
-
-| 制御構文 | 書き方 | 用途 |
-|---|---|---|
-| `if/elseif/else` | `if ($x -gt 0) { }` | 条件分岐 |
-| `switch` | `switch ($val) { "A" {} }` | 多分岐 |
-| `switch -Wildcard` | `"abc" { "a*" {} }` | ワイルドカード分岐 |
-| `switch -Regex` | `"123" { "^\d+" {} }` | 正規表現分岐 |
-
-| ループ | 書き方 | 使い分け |
-|---|---|---|
-| `for` | `for ($i=0; $i -lt N; $i++)` | 回数指定 |
-| `foreach` | `foreach ($x in $col)` | コレクション走査 |
-| `ForEach-Object` | `\| ForEach-Object { }` | パイプライン内 |
-| `while` | `while (条件) { }` | 条件が真の間 |
-| `do-while` | `do { } while (条件)` | 最低1回実行 |
-| `do-until` | `do { } until (条件)` | 条件が真になるまで |
-
-```powershell
-# ループ制御（暗記）
-break      # ループを抜ける
-continue   # 次の反復へスキップ
-return     # 関数から抜ける
-```

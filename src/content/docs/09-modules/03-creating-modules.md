@@ -100,29 +100,3 @@ Remove-Module MyTestModule
 ```
 
 
----
-
-## 🌙 寝る前チートシート
-
-> **第9章の要点を3分で復習**
-
-| 概念 | コマンド |
-|---|---|
-| モジュール一覧 | `Get-Module -ListAvailable` |
-| モジュール読み込み | `Import-Module モジュール名` |
-| Gallery検索 | `Find-Module -Name "*キーワード*"` |
-| インストール | `Install-Module -Name モジュール名 -Scope CurrentUser` |
-| 更新 | `Update-Module -Name モジュール名` |
-| 削除 | `Uninstall-Module -Name モジュール名` |
-
-```powershell
-# 独自モジュールの最小構成
-# MyModule/MyModule.psm1
-function Get-Greeting { param($Name) "Hello, $Name!" }
-
-# MyModule/MyModule.psd1（マニフェスト）
-New-ModuleManifest -Path MyModule.psd1 -RootModule MyModule.psm1
-
-# モジュールパスの確認
-$env:PSModulePath -split ':'
-```

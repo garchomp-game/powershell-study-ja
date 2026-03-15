@@ -124,29 +124,3 @@ Get-ChildItem Function:prompt
 ```
 
 
----
-
-## 🌙 寝る前チートシート
-
-> **第11章の要点を3分で復習**
-
-| プロバイダー | ドライブ | 対象 |
-|---|---|---|
-| FileSystem | `C:`, `/` | ファイル・フォルダ |
-| Environment | `Env:` | 環境変数 |
-| Variable | `Variable:` | PowerShell変数 |
-| Function | `Function:` | 関数定義 |
-| Alias | `Alias:` | エイリアス |
-| Registry | `HKLM:` `HKCU:` | レジストリ ⚠️ Windows専用 |
-
-```powershell
-# プロバイダー一覧
-Get-PSProvider
-Get-PSDrive
-
-# 全ドライブで同じコマンドが使える
-Get-ChildItem Env:              # 環境変数一覧
-Get-ChildItem Variable:         # 変数一覧
-$env:PATH                       # 環境変数アクセス
-New-PSDrive -Name docs -PSProvider FileSystem -Root ~/Documents
-```

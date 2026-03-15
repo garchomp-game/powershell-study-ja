@@ -110,38 +110,3 @@ $null = 1..5 | ForEach-Object {
 "エラー数: $($errs.Count)"
 ```
 
----
-
-## 🌙 寝る前チートシート
-
-> **第8章の要点を3分で復習**
-
-| エラーの種類 | 終了エラー | 非終了エラー |
-|---|---|---|
-| 動作 | スクリプト停止 | 表示して続行 |
-| 捕捉 | `try/catch` で捕捉可能 | `-ErrorAction Stop` で終了エラーに変換 |
-
-| ErrorAction | エラー表示 | 続行 | $Error記録 |
-|---|:---:|:---:|:---:|
-| `Continue` | ✅ | ✅ | ✅ |
-| `SilentlyContinue` | ❌ | ✅ | ✅ |
-| `Stop` | ✅ | ❌ | ✅ |
-| `Ignore` | ❌ | ✅ | ❌ |
-
-```powershell
-# try/catch/finally（丸暗記）
-try {
-    Get-Item "存在しない.txt" -ErrorAction Stop
-}
-catch {
-    Write-Warning "エラー: $_"
-}
-finally {
-    # 必ず実行（クリーンアップ）
-}
-
-# エラー変数
-$Error[0]                    # 直近のエラー
-$Error[0].Exception.Message  # メッセージ
-$Error.Clear()               # 履歴クリア
-```

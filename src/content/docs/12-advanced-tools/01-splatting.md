@@ -114,34 +114,3 @@ Find-Files -Path ~ -Recurse -MinSizeMB 10
 ```
 
 
----
-
-## 🌙 寝る前チートシート
-
-> **第12章の要点を3分で復習**
-
-| 技法 | 用途 |
-|---|---|
-| スプラッティング | `@params` でパラメータをまとめて渡す |
-| `-WhatIf` | `ShouldProcess` で安全な変更操作 |
-| 出力ストリーム | Success/Error/Warning/Verbose/Debug/Information |
-
-```powershell
-# スプラッティング（丸暗記）
-$params = @{
-    Path   = "/tmp"
-    Filter = "*.txt"
-    Recurse = $true
-}
-Get-ChildItem @params    # @で展開（$ではない！）
-
-# ShouldProcess 対応関数
-function Remove-OldFile {
-    [CmdletBinding(SupportsShouldProcess)]
-    param([string]$Path)
-    if ($PSCmdlet.ShouldProcess($Path, "Delete")) {
-        Remove-Item $Path
-    }
-}
-Remove-OldFile ./test.txt -WhatIf  # シミュレーション
-```

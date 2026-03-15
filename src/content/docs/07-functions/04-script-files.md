@@ -126,37 +126,3 @@ $script | Out-File /tmp/Get-DirStats.ps1
 pwsh /tmp/Get-DirStats.ps1 -Directory ~ -Recurse -Verbose
 ```
 
----
-
-## 🌙 寝る前チートシート
-
-> **第7章の要点を3分で復習**
-
-| 概念 | 書き方 |
-|---|---|
-| 基本関数 | `function Get-Greeting { param($Name) "Hello $Name" }` |
-| パラメータ | `param([string]$Name, [int]$Age = 20)` |
-| 必須パラメータ | `[Parameter(Mandatory)]$Name` |
-| 入力検証 | `[ValidateSet("A","B")]$Choice` |
-| CmdletBinding | `[CmdletBinding()] param(...)` で高度な関数に |
-| パイプライン対応 | `process { $_ }` ブロックで1件ずつ処理 |
-
-| スコープ | 意味 |
-|---|---|
-| `$local:var` | 現在のスコープのみ |
-| `$script:var` | スクリプト全体 |
-| `$global:var` | セッション全体 |
-
-```powershell
-# 定型パターン（丸暗記）
-function Verb-Noun {}
-    [CmdletBinding()]
-    param()
-        [Parameter(Mandatory, ValueFromPipeline)]
-        [string]$Name
-    )
-    begin   { <# 初期化 #> }
-    process { <# $_を処理 #> }
-    end     { <# 後処理 #> }
-}
-```

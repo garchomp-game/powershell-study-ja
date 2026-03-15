@@ -179,32 +179,3 @@ Write-Host "=== 並列処理 ==="
 ```
 
 
----
-
-## 🌙 寝る前チートシート
-
-> **第15章の要点を3分で復習**
-
-| 操作 | コマンド |
-|---|---|
-| リモート実行 | `Invoke-Command -ComputerName SV -ScriptBlock { }` |
-| SSH経由 | `Invoke-Command -HostName SV -ScriptBlock { }` |
-| セッション作成 | `$s = New-PSSession -ComputerName SV` |
-| ローカル変数参照 | `$using:変数名` |
-| ジョブ開始 | `Start-Job -ScriptBlock { }` |
-| ジョブ結果取得 | `Receive-Job -Id N` |
-| ジョブ一覧 | `Get-Job` |
-| 並列実行 | `1..10 \| ForEach-Object -Parallel { } -ThrottleLimit 5` |
-
-```powershell
-# ジョブの基本パターン（暗記）
-$job = Start-Job -ScriptBlock { Get-Process | Measure-Object }
-Wait-Job $job
-Receive-Job $job
-Remove-Job $job
-
-# 並列処理（PowerShell 7+）
-1..10 | ForEach-Object -Parallel {
-    "処理: $_"
-} -ThrottleLimit 5
-```

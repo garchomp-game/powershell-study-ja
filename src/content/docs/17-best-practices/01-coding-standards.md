@@ -217,28 +217,3 @@ Get-DirectorySummary -Path ~ -Verbose
 ```
 
 
----
-
-## 🌙 寝る前チートシート
-
-> **第17章の要点を3分で復習**
-
-| ベストプラクティス | ポイント |
-|---|---|
-| 命名規則 | `Verb-Noun` 形式、Approved Verbs を使う |
-| エラー処理 | `try/catch` + `-ErrorAction Stop` |
-| `-WhatIf` 対応 | 変更系関数には `SupportsShouldProcess` |
-| 出力 | `Write-Output`（データ） vs `Write-Host`（表示のみ） |
-| セキュリティ | `SecureString` / `Get-Credential` でパスワード管理 |
-| モジュール化 | 再利用可能な関数はモジュールに |
-| テスト | Pester でユニットテスト |
-
-```powershell
-# セキュリティ（暗記）
-$cred = Get-Credential                     # 安全な認証情報入力
-$pass = Read-Host -AsSecureString           # パスワードをマスク入力
-$plain = ConvertFrom-SecureString $pass -AsPlainText  # 平文化（PS7+）
-
-# Approved Verbs の確認
-Get-Verb | Sort-Object Verb
-```

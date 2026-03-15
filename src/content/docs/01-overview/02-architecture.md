@@ -227,25 +227,3 @@ $Host | Format-List *
 (Get-Alias).Count
 ```
 
----
-
-## 🌙 寝る前チートシート
-
-> **第1章の要点を3分で復習**
-
-| 概念 | ポイント |
-|---|---|
-| PowerShellとは | .NET上に構築された**オブジェクト指向**の自動化シェル |
-| 3つの顔 | ①コマンドラインシェル ②スクリプト言語 ③構成管理フレームワーク |
-| Win PS vs PS7 | Win PS = .NET Framework / 5.1で終了。PS7 = .NET Core / クロスプラットフォーム |
-| Verb-Noun | `Get-Process`、`Set-Location` のように「動詞-名詞」で命名 |
-| オブジェクトパイプライン | テキストではなく**.NETオブジェクト**がパイプを流れる |
-| コマンドの種類 | Cmdlet / Function / Alias / Application |
-| ホスト | ConsoleHost（ターミナル）、VS Code 統合ターミナル |
-
-```powershell
-# 覚えるべきコマンド
-$PSVersionTable         # バージョン確認
-$PSVersionTable.PSEdition  # Core or Desktop
-pwsh                    # PowerShell 7の起動コマンド
-```

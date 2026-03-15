@@ -186,37 +186,3 @@ $tasks | ForEach-Object { $_.ToString() }
 ```
 
 
----
-
-## 🌙 寝る前チートシート
-
-> **第14章の要点を3分で復習**
-
-| 概念 | 構文 |
-|---|---|
-| クラス定義 | `class MyClass { [string]$Name }` |
-| コンストラクタ | `MyClass([string]$n) { $this.Name = $n }` |
-| メソッド | `[string] GetInfo() { return $this.Name }` |
-| 継承 | `class Child : Parent { }` |
-| Enum | `enum Color { Red; Green; Blue }` |
-| インスタンス化 | `$obj = [MyClass]::new("value")` |
-
-| class vs PSCustomObject | class | PSCustomObject |
-|---|---|---|
-| メソッド | ✅ あり | ❌ なし |
-| 型チェック | ✅ 厳密 | ❌ なし |
-| 継承 | ✅ 可能 | ❌ 不可 |
-| 手軽さ | △ | ◎ |
-
-```powershell
-# PSCustomObject（手軽にオブジェクト作成）
-$obj = [PSCustomObject]@{ Name = "test"; Value = 42 }
-
-# class（型安全な定義）
-class Person {
-    [string]$Name
-    [int]$Age
-    Person([string]$n, [int]$a) { $this.Name=$n; $this.Age=$a }
-    [string] ToString() { return "$($this.Name) ($($this.Age))" }
-}
-```
