@@ -94,3 +94,30 @@ $env:PATH -split [IO.Path]::PathSeparator | ForEach-Object {
     [PSCustomObject]@{ Path=$_; Exists=(Test-Path $_) }
 } | Format-Table
 ```
+
+
+---
+
+## 🌙 寝る前チートシート
+
+> **第10章の要点を3分で復習**
+
+| 操作 | コマンド |
+|---|---|
+| ファイル読み込み | `Get-Content ./file.txt` |
+| ファイル書き出し | `Set-Content ./file.txt -Value "text"` |
+| 追記 | `Add-Content ./file.txt -Value "追加"` |
+| CSV読み込み | `Import-Csv ./data.csv` |
+| CSV書き出し | `Export-Csv ./out.csv -NoTypeInformation` |
+| JSON読み込み | `Get-Content ./data.json \| ConvertFrom-Json` |
+| JSON書き出し | `$obj \| ConvertTo-Json \| Out-File ./out.json` |
+| 文字列検索 | `Select-String -Pattern "regex" -Path ./file.txt` |
+
+```powershell
+# ファイル操作の定番パターン
+New-Item -Path ./file.txt -ItemType File -Force
+Set-Content ./file.txt -Value "Hello"
+Get-Content ./file.txt
+Test-Path ./file.txt     # → True
+Remove-Item ./file.txt
+```

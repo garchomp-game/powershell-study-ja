@@ -237,3 +237,28 @@ Pop-Location         # 元の場所に戻る
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin
 Set-PSReadLineOption -PredictionViewStyle ListView
 ```
+
+---
+
+## 🌙 寝る前チートシート
+
+> **第2章の要点を3分で復習**
+
+| 操作 | キー / コマンド |
+|---|---|
+| コマンド履歴を遡る | `↑` `↓` キー |
+| 単語単位の移動 | `Ctrl+←` `Ctrl+→` |
+| 行頭 / 行末 | `Home` / `End` |
+| タブ補完 | `Tab` / `Shift+Tab` |
+| 履歴検索 | `Ctrl+R` |
+| 画面クリア | `Ctrl+L` または `Clear-Host` |
+| 処理の中断 | `Ctrl+C` |
+
+```powershell
+# インストール確認
+$PSVersionTable.PSVersion   # バージョン
+$PROFILE                    # プロファイルのパス
+code $PROFILE               # プロファイルを編集
+Get-PSReadLineKeyHandler    # キーバインド一覧
+Set-PSReadLineOption -PredictionSource History  # 履歴予測ON
+```

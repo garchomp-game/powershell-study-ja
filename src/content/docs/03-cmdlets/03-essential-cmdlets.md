@@ -194,3 +194,38 @@ Get-Process | Select-Object Name, Id, CPU |
     Export-Csv -Path /tmp/processes.csv -NoTypeInformation
 Get-Content /tmp/processes.csv | Select-Object -First 5
 ```
+
+---
+
+## 🌙 寝る前チートシート
+
+> **第3章の要点を3分で復習**
+
+| 必須三大コマンド | 用途 |
+|---|---|
+| `Get-Command *名詞*` | コマンドを**探す** |
+| `Get-Help コマンド -Examples` | 使い方を**学ぶ** |
+| `コマンド \| Get-Member` | 出力を**理解する** |
+
+| よく使うエイリアス | 本名 |
+|---|---|
+| `ls`, `dir` | `Get-ChildItem` |
+| `cd` | `Set-Location` |
+| `cat` | `Get-Content` |
+| `cp` | `Copy-Item` |
+| `mv` | `Move-Item` |
+| `rm` | `Remove-Item` |
+| `ps` | `Get-Process` |
+| `kill` | `Stop-Process` |
+| `echo` | `Write-Output` |
+| `?` | `Where-Object` |
+| `%` | `ForEach-Object` |
+| `select` | `Select-Object` |
+| `sort` | `Sort-Object` |
+| `ft` | `Format-Table` |
+| `fl` | `Format-List` |
+
+```powershell
+# 暗記確認: 以下をエイリアスなしで書けますか？
+ls ~ -File | ? Length -gt 1MB | sort Length -Desc | select -First 5 Name, Length
+```

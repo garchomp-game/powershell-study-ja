@@ -129,3 +129,33 @@ Test-Email "invalid"            # False
 $text = "Visit https://example.com or http://test.org/page for info"
 [regex]::Matches($text, 'https?://[\w./%-]+') | ForEach-Object { $_.Value }
 ```
+
+
+---
+
+## 🌙 寝る前チートシート
+
+> **第13章の要点を3分で復習**
+
+| 演算子 | 用途 | 例 |
+|---|---|---|
+| `-match` | 正規表現で一致判定 | `"abc" -match "^a"` |
+| `-replace` | 正規表現で置換 | `"abc" -replace "a","X"` |
+| `-split` | 正規表現で分割 | `"a,b;c" -split '[,;]'` |
+| `$Matches` | -match の結果 | `$Matches[0]` |
+
+| 正規表現 | 意味 | 例 |
+|---|---|---|
+| `.` | 任意の1文字 | `a.c` → abc |
+| `*` `+` `?` | 0個以上 / 1個以上 / 0or1 | `a+` → aaa |
+| `^` `$` | 行頭 / 行末 | `^Hello` |
+| `\d` `\w` `\s` | 数字 / 単語文字 / 空白 | `\d{3}` |
+| `[a-z]` | 文字クラス | `[0-9]+` |
+| `(...)` | キャプチャグループ | `(\d+)-(\d+)` |
+| `(?<name>...)` | 名前付きキャプチャ | `(?<year>\d{4})` |
+
+```powershell
+# 名前付きキャプチャ（暗記）
+"2024-01-15" -match '(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})'
+$Matches.year   # 2024
+```

@@ -204,3 +204,34 @@ Get-Process | Sort-Object WorkingSet64 -Descending | Select-Object -First 10 |
         @{L='CPU(s)'; E={'{0:N2}' -f $_.CPU}; A='Right'},
         @{L='Mem(MB)'; E={[math]::Round($_.WorkingSet64/1MB)}; A='Right'} -AutoSize
 ```
+
+---
+
+## 🌙 寝る前チートシート
+
+> **第4章の要点を3分で復習**
+
+| パイプライン操作 | コマンド | 覚え方 |
+|---|---|---|
+| フィルタ | `Where-Object { 条件 }` | 「どれ？」 |
+| ソート | `Sort-Object プロパティ` | 「並べて」 |
+| 選択 | `Select-Object -First N` | 「これだけ」 |
+| 変換 | `ForEach-Object { 処理 }` | 「それぞれ」 |
+| グループ | `Group-Object プロパティ` | 「分けて」 |
+| 集計 | `Measure-Object -Sum` | 「数えて」 |
+| 比較 | `Compare-Object $a $b` | 「違いは？」 |
+| 分岐 | `Tee-Object -Variable v` | 「コピーして」 |
+
+| 出力 | コマンド |
+|---|---|
+| 表形式 | `Format-Table -AutoSize` |
+| リスト | `Format-List *` |
+| CSV保存 | `Export-Csv ./file.csv -NoTypeInformation` |
+| JSON変換 | `ConvertTo-Json` |
+| ファイル保存 | `Out-File ./file.txt` |
+| 破棄 | `$null = ...`（最速） |
+
+```powershell
+# 定番パターン（丸暗記）
+Get-Process | Where-Object CPU -gt 0 | Sort-Object CPU -Desc | Select-Object -First 5
+```
