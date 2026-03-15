@@ -15,7 +15,7 @@ Get-Process | Where-Object { $_.CPU -gt 10 }
 Get-Process | Where-Object CPU -gt 10
 
 # 文字列のフィルタリング
-Get-Service | Where-Object Status -eq "Running"
+Get-Process | Where-Object ProcessName -like "*sh*"
 Get-ChildItem | Where-Object Name -like "*.log"
 
 # 複合条件
@@ -132,9 +132,7 @@ Get-ChildItem ~ -Recurse -File -ErrorAction SilentlyContinue |
     Sort-Object Length -Descending |
     Select-Object -First 10 @{N='SizeMB';E={[math]::Round($_.Length/1MB,1)}}, FullName
 
-# 3. 実行中のサービス一覧（Linuxではsystemd経由で取得可能な範囲）
-Get-Service -ErrorAction SilentlyContinue |
-    Where-Object Status -eq "Running" |
-    Sort-Object DisplayName |
-    Select-Object DisplayName, Status
+# 3. メモリ使用量の多いプロセストップ10
+Get-Process | Sort-Object WorkingSet -Descending |
+    Select-Object -First 10 Name, @{N='MemMB';E={[math]::Round($_.WorkingSet/1MB,1)}}
 ```

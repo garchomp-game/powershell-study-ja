@@ -25,7 +25,7 @@ PowerShellには数千のコマンドレットがありますが、日常的に�
 ```powershell
 # 使用例
 Get-Command *-Process        # Process関連コマンドの検索
-Get-Help Get-Service -Examples  # サービスコマンドの使用例
+Get-Help Get-ChildItem -Examples  # ファイル操作コマンドの使用例
 "Hello" | Get-Member          # 文字列のメンバー探索
 ```
 
@@ -102,21 +102,23 @@ Get-Process |
 
 ```powershell
 # 出力フォーマットの比較
-Get-Service | Format-Table Name, Status -AutoSize
-Get-Service | Format-List Name, Status, DisplayName
+Get-Process | Format-Table Name, CPU, Id -AutoSize
+Get-Process | Format-List Name, CPU, Id, Path
 Get-Process | Select-Object Name, CPU | Export-Csv ./procs.csv -NoTypeInformation
 Get-Process | Select-Object Name, CPU | ConvertTo-Json
 ```
 
 ## ⚙️ プロセス・サービス管理（5個）
 
+> **❗ プラットフォーム注意:** `Get-Service`, `Start-Service`, `Stop-Service` は **Windows専用** です。Linux/macOSでサービスを管理する場合は `systemctl` コマンドを使用してください。
+
 | # | コマンドレット | エイリアス | 説明 |
 |:---:|---|---|---|
 | 40 | `Get-Process` | `ps`, `gps` | プロセス一覧 |
 | 41 | `Stop-Process` | `kill` | プロセスを停止 |
-| 42 | `Get-Service` | `gsv` | サービス一覧 |
-| 43 | `Start-Service` | `sasv` | サービスを開始 |
-| 44 | `Stop-Service` | `spsv` | サービスを停止 |
+| 42 | `Get-Service` | `gsv` | サービス一覧 ⚠️ Windows専用 |
+| 43 | `Start-Service` | `sasv` | サービスを開始 ⚠️ Windows専用 |
+| 44 | `Stop-Service` | `spsv` | サービスを停止 ⚠️ Windows専用 |
 
 ## 🌐 ネットワーク・Web（3個）
 
@@ -187,8 +189,8 @@ Invoke-RestMethod -Uri "https://api.ipify.org?format=json"
 # 4. カレントディレクトリのファイルを拡張子別に集計
 Get-ChildItem -File | Group-Object Extension | Sort-Object Count -Descending
 
-# 5. サービス一覧をCSVファイルにエクスポート
-Get-Service | Select-Object Name, Status, DisplayName |
-    Export-Csv -Path ./services.csv -NoTypeInformation
-Get-Content ./services.csv | Select-Object -First 5
+# 5. プロセス情報をCSVファイルにエクスポート
+Get-Process | Select-Object Name, Id, CPU |
+    Export-Csv -Path /tmp/processes.csv -NoTypeInformation
+Get-Content /tmp/processes.csv | Select-Object -First 5
 ```

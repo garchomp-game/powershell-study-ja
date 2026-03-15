@@ -42,10 +42,10 @@ Get-Process |
 
 ```powershell
 # $_ で現在のオブジェクトにアクセス
-Get-Service | Where-Object { $_.Status -eq "Running" }
+Get-Process | Where-Object { $_.CPU -gt 10 }
 
 # $PSItem でも同じ（PowerShell 3.0+）
-Get-Service | Where-Object { $PSItem.Status -eq "Running" }
+Get-Process | Where-Object { $PSItem.CPU -gt 10 }
 
 # プロパティへのアクセス
 Get-Process | ForEach-Object { "$($_.Name): $($_.CPU)" }
@@ -87,9 +87,9 @@ Get-Help Get-Process -Parameter Name
 
 ```powershell
 # CSVからプロパティ名で自動バインド
-# services.csv: Name,Status
-# SSH,Running
-Import-Csv ./services.csv | Get-Service
+# processes.csv: Name
+# pwsh
+Import-Csv ./processes.csv | Get-Process
 
 # カスタムオブジェクトのプロパティ名でバインド
 [PSCustomObject]@{
@@ -179,8 +179,8 @@ $sorted
 ## ハンズオン課題
 
 ```powershell
-# 1. 実行中のサービスの件数を数える
-Get-Service | Where-Object { $_.Status -eq "Running" } | Measure-Object
+# 1. CPUを使用中のプロセスの件数を数える
+Get-Process | Where-Object { $_.CPU -gt 0 } | Measure-Object
 
 # 2. 環境変数をアルファベット順に表示
 Get-ChildItem Env: | Sort-Object Name | Format-Table Name, Value

@@ -69,7 +69,7 @@ Get-Pro<Tab>     # → Get-Process
 Get-Process -Na<Tab>  # → Get-Process -Name
 
 # パラメータ値の補完
-Get-Service -Name wi<Tab>  # → サービス名の候補が表示
+Get-Process -Name pw<Tab>  # → プロセス名の候補が表示
 
 # パス補完
 Get-ChildItem C:\Users\<Tab>  # → ユーザーフォルダの候補

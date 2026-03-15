@@ -10,8 +10,8 @@ sidebar:
 `Group-Object`（エイリアス: `group`）は、指定したプロパティの値でオブジェクトをグループ化します。
 
 ```powershell
-# サービスを状態別にグループ化
-Get-Service | Group-Object Status
+# プロセスを名前別にグループ化
+Get-Process | Group-Object Name | Sort-Object Count -Descending | Select-Object -First 5
 
 # ファイルを拡張子別にグループ化
 Get-ChildItem -File | Group-Object Extension
@@ -20,12 +20,11 @@ Get-ChildItem -File | Group-Object Extension
 Get-Process | Group-Object Name | Sort-Object Count -Descending | Select-Object -First 10
 
 # ハッシュテーブルとして取得（高速な検索が可能）
-$grouped = Get-Service | Group-Object Status -AsHashTable
-$grouped['Running']   # 実行中のサービス一覧
-$grouped['Stopped']   # 停止中のサービス一覧
+$grouped = Get-Process | Group-Object Name -AsHashTable
+$grouped['pwsh']    # pwshプロセス一覧
 
 # 文字列化されたキー
-$grouped = Get-Service | Group-Object Status -AsHashTable -AsString
+Get-ChildItem -File | Group-Object Extension -AsHashTable -AsString
 ```
 
 ### カスタムグループ化
@@ -50,7 +49,7 @@ Get-ChildItem -File | Group-Object { $_.LastWriteTime.ToString("yyyy-MM") }
 ```powershell
 # 件数の計測
 Get-Process | Measure-Object
-Get-Service | Where-Object Status -eq Running | Measure-Object
+Get-Process | Where-Object CPU -gt 0 | Measure-Object
 
 # 数値プロパティの集計
 Get-Process | Measure-Object CPU -Sum -Average -Maximum -Minimum
@@ -101,10 +100,10 @@ Compare-Object $dir1 $dir2
 Compare-Object $a $b -IncludeEqual
 
 # 特定のプロパティで比較
-$before = Get-Service
+$before = Get-Process
 # ... 何か変更を加える ...
-$after = Get-Service
-Compare-Object $before $after -Property Status
+$after = Get-Process
+Compare-Object $before $after -Property CPU
 ```
 
 | SideIndicator | 意味 |
@@ -131,7 +130,7 @@ Get-Process | Tee-Object -Variable allProcs | Where-Object CPU -gt 10
 # $allProcs には全プロセスが、パイプには CPU > 10 のみ流れる
 
 # ファイルに保存しつつ画面にも表示
-Get-Service | Tee-Object -FilePath ./services.txt | Where-Object Status -eq Running
+Get-Process | Tee-Object -FilePath /tmp/processes.txt | Where-Object CPU -gt 10
 
 # 追記モード
 Get-Process | Tee-Object -FilePath ./log.txt -Append

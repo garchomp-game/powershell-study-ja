@@ -19,7 +19,7 @@ Get-Process | Format-Table
 Get-Process | Format-Table Name, CPU, Id -AutoSize
 
 # 列幅の自動調整
-Get-Service | Format-Table -AutoSize
+Get-Process | Format-Table -AutoSize
 
 # 折り返し表示
 Get-Process | Format-Table -Wrap
@@ -30,7 +30,7 @@ Get-Process | Format-Table Name,
     @{Label='Mem(MB)'; Expression={[math]::Round($_.WorkingSet64/1MB)}; Align='Right'} -AutoSize
 
 # グループ化して表示
-Get-Service | Sort-Object Status | Format-Table -GroupBy Status
+Get-Process | Sort-Object Company | Format-Table -GroupBy Company -AutoSize
 ```
 
 ### Format-List（fl）— リスト形式
@@ -42,7 +42,7 @@ Get-Service | Sort-Object Status | Format-Table -GroupBy Status
 Get-Process pwsh | Format-List *
 
 # 特定のプロパティだけ
-Get-Service | Select-Object -First 3 | Format-List Name, Status, DisplayName, StartType
+Get-Process | Select-Object -First 3 | Format-List Name, Id, CPU, Path
 ```
 
 ### Format-Wide（fw）— ワイド形式
@@ -83,7 +83,7 @@ Get-Process | Select-Object Name, Id, CPU |
     Export-Csv ./processes.csv -NoTypeInformation
 
 # エンコーディング指定
-Get-Service | Export-Csv ./services.csv -NoTypeInformation -Encoding UTF8
+Get-Process | Select-Object Name, Id, CPU | Export-Csv /tmp/processes.csv -NoTypeInformation -Encoding UTF8
 
 # CSVの読み込み
 $data = Import-Csv ./processes.csv
@@ -114,7 +114,7 @@ $loaded.Server  # "localhost"
 
 ```powershell
 # HTML形式で出力
-Get-Service | Select-Object Name, Status |
+Get-Process | Select-Object Name, Id, CPU |
     ConvertTo-Html -Title "サービス一覧" |
     Out-File ./services.html
 
@@ -134,7 +134,7 @@ Get-Process | Out-GridView
 Get-Process | Out-GridView -PassThru | Stop-Process -WhatIf
 
 # タイトル付き
-Get-Service | Out-GridView -Title "サービス一覧"
+Get-Process | Out-GridView -Title "プロセス一覧"
 ```
 
 ## Out-Null — 出力の破棄
@@ -194,9 +194,9 @@ for ($i = 0; $i -lt $items.Count; $i++) {
 Get-Process | Select-Object Name, Id, CPU | Export-Csv /tmp/ps-procs.csv -NoTypeInformation
 Import-Csv /tmp/ps-procs.csv | Select-Object -First 5
 
-# 2. サービス一覧をJSON形式でファイルに保存
-Get-Service | Select-Object Name, Status | ConvertTo-Json | Out-File /tmp/services.json
-Get-Content /tmp/services.json | ConvertFrom-Json | Select-Object -First 3
+# 2. プロセス情報をJSON形式でファイルに保存
+Get-Process | Select-Object Name, Id, CPU | ConvertTo-Json | Out-File /tmp/processes.json
+Get-Content /tmp/processes.json | ConvertFrom-Json | Select-Object -First 3
 
 # 3. Format-Table のカスタム列で見やすいプロセスレポートを作成
 Get-Process | Sort-Object WorkingSet64 -Descending | Select-Object -First 10 |

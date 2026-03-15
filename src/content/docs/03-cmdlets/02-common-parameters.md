@@ -179,9 +179,9 @@ Get-Process pwsh -OutVariable +processes
 
 ```powershell
 # パイプライン内で変数を保持
-Get-Service -PipelineVariable svc |
-    Where-Object { $_.Status -eq 'Running' } |
-    ForEach-Object { "$($svc.Name): $($_.DisplayName)" }
+Get-Process -PipelineVariable proc |
+    Where-Object { $_.CPU -gt 0 } |
+    ForEach-Object { "$($proc.Name): CPU=$($_.CPU)" }
 ```
 
 ## パラメータセットとパラメータバインディング

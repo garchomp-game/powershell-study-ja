@@ -28,7 +28,7 @@ Invoke-Command -ComputerName Server01 -ScriptBlock {
 # 複数コンピュータに同時実行
 Invoke-Command -ComputerName Server01, Server02, Server03 -ScriptBlock {
     $env:COMPUTERNAME
-    Get-Service -Name sshd | Select-Object Status
+    Get-Process | Select-Object -First 5 Name, CPU
 }
 
 # SSH経由のリモート実行（クロスプラットフォーム）
@@ -38,9 +38,9 @@ Invoke-Command -HostName linux-server -UserName admin -ScriptBlock {
 }
 
 # ローカル変数をリモートに渡す
-$serviceName = "sshd"
+$processName = "pwsh"
 Invoke-Command -ComputerName Server01 -ScriptBlock {
-    Get-Service -Name $using:serviceName
+    Get-Process -Name $using:processName
 }
 ```
 

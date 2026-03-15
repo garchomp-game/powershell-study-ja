@@ -182,23 +182,25 @@ flowchart TD
     style D fill:#e74c3c,color:#fff
 ```
 
-### 実践例: 「サービスの管理をしたい」
+### 実践例: 「ファイル操作をしたい」
 
 ```powershell
-# Step 1: サービス関連のコマンドを探す
-Get-Command *Service*
-# → Get-Service, Start-Service, Stop-Service, Restart-Service, ...
+# Step 1: ファイル関連のコマンドを探す
+Get-Command *Item*
+# → Get-Item, New-Item, Copy-Item, Remove-Item, ...
 
-# Step 2: Get-Service の使い方を確認
-Get-Help Get-Service -Examples
+# Step 2: Get-ChildItem の使い方を確認
+Get-Help Get-ChildItem -Examples
 
-# Step 3: Get-Service の出力オブジェクトを確認
-Get-Service | Get-Member
-# → Status, Name, DisplayName, ServiceType などのプロパティがある
+# Step 3: Get-ChildItem の出力オブジェクトを確認
+Get-ChildItem | Get-Member
+# → Name, Length, LastWriteTime などのプロパティがある
 
 # Step 4: 実際に使う
-Get-Service | Where-Object { $_.Status -eq 'Running' } | Select-Object Name, Status
+Get-ChildItem ~ -File | Where-Object { $_.Length -gt 1MB } | Select-Object Name, Length
 ```
+
+> **補足:** `Get-Service` や `Start-Service` などのサービス系コマンドは **Windows専用** です。Linuxでサービスを管理する場合は `systemctl` コマンドを使用してください。
 
 ## Show-Command — GUIでコマンドを構築
 

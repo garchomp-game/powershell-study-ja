@@ -106,7 +106,7 @@ PowerShellのコマンドレットは `動詞-名詞` の形式で統一され�
 
 | カテゴリ | 動詞 | 意味 | 例 |
 |---|---|---|---|
-| **データ取得** | `Get` | 取得する | `Get-Process`, `Get-Service` |
+| **データ取得** | `Get` | 取得する | `Get-Process`, `Get-ChildItem` |
 | **データ変更** | `Set` | 設定する | `Set-Location`, `Set-Content` |
 | **作成** | `New` | 新規作成 | `New-Item`, `New-Object` |
 | **削除** | `Remove` | 削除する | `Remove-Item`, `Remove-Variable` |
