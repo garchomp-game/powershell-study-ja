@@ -134,6 +134,17 @@ export default defineConfig({
 						},
 					],
 				},
+				{
+					label: '第4部: 実践プロジェクト',
+					collapsed: false,
+					items: [
+						{
+							label: '第18章: DevOps Monitor Toolkit',
+							collapsed: true,
+							autogenerate: { directory: '18-sample-project' },
+						},
+					],
+				},
 			],
 		}),
 	],

@@ -1,0 +1,32 @@
+{
+    "AppName": "DevOps Monitor Toolkit",
+    "Version": "1.0.0",
+    "Monitoring": {
+        "IntervalSeconds": 5,
+        "HistoryRetentionMinutes": 60,
+        "Thresholds": {
+            "CpuWarning": 70,
+            "CpuCritical": 90,
+            "MemoryWarning": 80,
+            "MemoryCritical": 95,
+            "DiskWarning": 85,
+            "DiskCritical": 95
+        }
+    },
+    "Api": {
+        "GitHubBaseUrl": "https://api.github.com",
+        "IpInfoUrl": "https://api.ipify.org?format=json",
+        "WeatherUrl": "https://wttr.in/?format=j1",
+        "HttpBinUrl": "https://httpbin.org"
+    },
+    "Report": {
+        "OutputDir": "/tmp/devops-reports",
+        "Format": "HTML",
+        "Theme": "dark"
+    },
+    "Logging": {
+        "Level": "Info",
+        "File": "/tmp/devops-monitor.log",
+        "MaxSizeMB": 10
+    }
+}
