@@ -8,6 +8,64 @@ sidebar:
 この章では、PowerShellの機能を**フル活用**した実践プロジェクト「DevOps Monitor Toolkit」を通じて、
 これまで学んだ技術がどのように連携して動くのかを体系的に解説します。
 
+## リポジトリを取得してハンズオン学習
+
+このプロジェクトのソースコードは GitHub リポジトリに含まれています。
+**実際にコードを動かしながら**この解説を読み進めることを強くお勧めします。
+
+### セットアップ
+
+```bash
+# リポジトリをクローン
+git clone https://github.com/garchomp-game/powershell-study-ja.git
+cd powershell-study-ja
+
+# PowerShellを起動してサンプルプロジェクトに移動
+pwsh
+cd examples/devops-monitor
+```
+
+### 学習の進め方
+
+以下の順番でソースコードを開きながら、各ページの解説を読み進めてください：
+
+| ステップ | 読むページ | 参照するソースコード | やること |
+|:---:|---|---|---|
+| 1 | **この概要ページ** | `examples/devops-monitor/` 全体 | 構成を把握する |
+| 2 | コアモジュール解説 | `modules/DevOpsCore/DevOpsCore.psm1` | class/enum/関数を読む |
+| 3 | HTMLレポーター解説 | `modules/HtmlReporter/HtmlReporter.psm1` | HTML生成の仕組みを理解 |
+| 4 | ツールスクリプト解説 | `tools/Invoke-SystemHealthCheck.ps1` | ヘルスチェックを実行してみる |
+| 4 | 〃 | `tools/Get-ProjectStats.ps1` | 自分のプロジェクトを分析 |
+| 4 | 〃 | `tools/Watch-SystemMetrics.ps1` | リアルタイム監視を体験 |
+| 4 | 〃 | `tools/Invoke-ApiDashboard.ps1` | API呼び出しを試す |
+| 5 | 使用技法の深掘り | 上記すべて | 技法を横断的に復習 |
+
+:::tip[おすすめの学習方法]
+1. **まず動かしてみる** — `./Start-DevOpsMonitor.ps1` でメニューを起動し、各ツールを試す
+2. **出力を観察する** — コンソールやHTMLレポートの出力を確認する
+3. **コードを読む** — 解説ページを参照しながらソースコードを追いかける
+4. **改造してみる** — 閾値を変えたり、新しいメトリクスを追加してみる
+:::
+
+### クイックスタート: まず動かしてみよう
+
+```powershell
+# 1. ヘルスチェック（最初に試すならこれ！）
+./tools/Invoke-SystemHealthCheck.ps1
+
+# 2. 生成されたHTMLダッシュボードを開く
+# xdg-open /tmp/devops-reports/dashboard.html
+
+# 3. このリポジトリ自体を分析してみる
+./tools/Get-ProjectStats.ps1 -Path ../.. -ShowTodos
+
+# 4. 15秒間のリアルタイムCPU/メモリ監視
+./tools/Watch-SystemMetrics.ps1 -Duration 15
+
+# 5. 対話メニューから全機能を試す
+./Start-DevOpsMonitor.ps1
+```
+
 ## プロジェクトの目的
 
 このツールキットは以下を1つのプロジェクトに統合しています：
